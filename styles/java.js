@@ -1,9 +1,8 @@
-document.addEventListener("DOMContentLoade", function () {
+document.addEventListener("DOMContentLoaded", function () {
     let selectedSeats = [];
     let originalPrice = 0;
-    let discount = 0;
+   
 
-    const maxSeats = 4;
     const seatPrice = 550;
 
     const seatButtons = document.querySelectorAll(".moddi");
@@ -31,19 +30,21 @@ document.addEventListener("DOMContentLoade", function () {
     function updateSeatClassPrice(seat) {
         const seatClassPrice = document.getElementById("seat-container");
 
-        // Check if the seat is already added, remove if yes
+        
         const existingSeat = document.getElementById("seat-" + seat);
         if (existingSeat) {
             existingSeat.remove();
-        } else {
+        } 
+        else {
             const seatClassPriceItem = document.createElement("div");
             seatClassPriceItem.id = "seat-" + seat;
             seatClassPriceItem.className = "flex justify-between text-xl border-dashed border-b-2 pb-4";
+            
             seatClassPriceItem.innerHTML = "<p id='seat'>" + seat + "</p><p id='economy'>economy</p><p id='550'>" + seatPrice + "</p>";
             seatClassPrice.appendChild(seatClassPriceItem);
         }
     }
-
+    const maxSeats = 4;
     function handleSeatClick(seat) {
         const seatIndex = selectedSeats.indexOf(seat);
 
@@ -58,7 +59,8 @@ document.addEventListener("DOMContentLoade", function () {
 
             updateSeatContainer();
             updateSeatClassPrice(seat);
-        } else if (seatIndex !== -1) {
+        } 
+        else if (seatIndex !== -1) {
             selectedSeats.splice(seatIndex, 1);
             document.getElementById(seat).classList.remove("bg-green-400");
 
@@ -69,11 +71,12 @@ document.addEventListener("DOMContentLoade", function () {
 
             updateSeatContainer();
             updateSeatClassPrice(seat);
-        } else {
+        }
+         else {
             alert('max select seat number is 4');
         }
     }
-
+    let discount = 0;
     function handleCouponApply() {
         const couponInput = document.getElementById("coupon-input");
         const couponCode = couponInput.value.trim();
@@ -82,11 +85,15 @@ document.addEventListener("DOMContentLoade", function () {
             discount = Math.round((originalPrice * 15) / 100);
             couponInput.disabled = true;
             document.getElementById("coupon-apply-button").style.display = "none";
-        } else if (couponCode === 'Couple 20') {
+
+        }
+         else if (couponCode === 'Couple 20') {
             discount = Math.round((originalPrice * 20) / 100);
             couponInput.disabled = true;
             document.getElementById("coupon-apply-button").style.display = "none";
-        } else {
+
+        } 
+        else {
             discount = 0;
             alert('Enter a corrected coupon code ');
         }
